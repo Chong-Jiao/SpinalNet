@@ -75,7 +75,7 @@ x8 = torch.unsqueeze(torch.randn(size_x), dim=1)
 
 half_in_size=4
 
-y = (x1*x2*x3*x4*x5*x6*x7*x8) +  0.2*torch.rand(size_x)
+y = (x1*x2*x3*x4*x5*x6*x7*x8) +  0.2*torch.rand(size_x, 1)
               # noisy y data (tensor), shape=(100, 1)
 
 x=torch.cat([x1,x2,x3,x4,x5,x6,x7,x8], dim=1)
@@ -118,9 +118,9 @@ class SpinalNet(nn.Module):
         x4= torch.cat([x[:,half_in_size:half_in_size*2], x3], dim=1)
         x4 = self.lru(self.fc4(x4))
         x5= torch.cat([x[:,0:half_in_size], x4], dim=1)
-        x5 = self.lru(self.fc3(x5))
+        x5 = self.lru(self.fc5(x5))
         x6= torch.cat([x[:,half_in_size:half_in_size*2], x5], dim=1)
-        x6 = self.lru(self.fc4(x6))
+        x6 = self.lru(self.fc6(x6))
         
         
         
